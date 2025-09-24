@@ -24,7 +24,7 @@
         <li>Що таке компонент React?</li>
         <li>Структура компонента</li>
         <li>JSX. Робота з JSX</li>
-        <li>Умовний рендеринг і списки</li>
+        <li>Умовний рендеринг, списки та об'єкти</li>
     </ol>
 </section>
 
@@ -93,7 +93,7 @@
 <section class="slide">
     <h2>Структура компонента React</h2>
     <div class="columns two">
-        <img src="pictures/react-component.png" width="450" alt="">
+        <img src="pictures/1.png" width="400" alt="" style="border: 4px solid #ABB8C3">
         <div>
             <ol>
                 <li>JSX (розмітка)</li>
@@ -112,88 +112,361 @@
 
 
 <section class="slide">
-    <h2>JSX. Інтерполяції</h2>
-    <p>В JSX дані можна вставляти у фігурних дужках:</p>
-    <pre><code>
-const msg = "Hello!";
-&lt;span&gt;Повідомлення: {msg}&lt;/span&gt;
-    </code></pre>
-    <p>Значення буде оновлюватися динамічно при зміні стану.</p>
+    <h2>JSX. Робота з шаблонами в React</h2>
+    <b>Інтерполяція</b>
+    <p>
+        У React для підстановки значень у розмітку
+        використовується синтаксис фігурних дужок:
+        <br>
+        <code>
+            <span>Повідомлення: {msg}</span>
+        </code>
+    </p>
+    <p>
+        Вираз у дужках <code>{ }</code> буде замінено значенням
+        змінної <code>msg</code>. Якщо значення зміниться,
+        React автоматично виконає повторний рендеринг
+        компонента з оновленими даними.
+    </p>
 </section>
 
 <section class="slide">
-    <h2>JSX. Атрибути</h2>
-    <p>Атрибути пишуться як властивості JS-об’єктів:</p>
-    <pre><code>
-const id = "dynamicId";
-&lt;div id={id}&gt;&lt;/div&gt;
-
-const isDisabled = true;
-&lt;button disabled={isDisabled}&gt;Кнопка&lt;/button&gt;
-    </code></pre>
+    <h2>JSX. Робота з шаблонами в React</h2>
+    <b>children (ReactNode)</b>
+    <p>
+        У React елементи та навіть фрагменти HTML можна передавати як
+        <code>children</code>. Це значення автоматично інтерпретується як JSX
+        і безпечно вставляється у розмітку:
+    </p>
+    <p>
+        <code>
+            function Wrapper({ children }: {children: ReactNode}) {<br>
+            &nbsp;&nbsp;return &lt;div className="box"&gt;&#123;children&#125;&lt;/div&gt;;<br>
+            &#125;<br><br>
+            &lt;Wrapper&gt;<br>
+            &nbsp;&nbsp;&lt;p&gt;Це передано як children&lt;/p&gt;<br>
+            &lt;/Wrapper&gt;
+        </code>
+    </p>
 </section>
 
 <section class="slide">
-    <h2>JSX. Використання виразів</h2>
-    <pre><code>
-&lt;p&gt;{1 + 2}&lt;/p&gt;
-&lt;p&gt;{ok ? "YES" : "NO"}&lt;/p&gt;
-&lt;p&gt;{message.split("").reverse().join("")}&lt;/p&gt;
-&lt;div id={`list-${id}`}&gt;&lt;/div&gt;
-    </code></pre>
+    <h2>JSX. Робота з шаблонами в React</h2>
+    <b>children (ReactNode)</b>
+    <p>
+        <code>
+            &lt;Wrapper&gt;<br>
+            &nbsp;&nbsp;&lt;p&gt;Це передано як children&lt;/p&gt;<br>
+            &lt;/Wrapper&gt;
+        </code>
+    </p>
+    <p>
+        У цьому прикладі <code>&lt;p&gt;</code>-елемент передається в компонент <code>Wrapper</code>
+        як <code>children</code> і відображається всередині нього.
+        Так можна вкладати будь-які JSX-елементи.
+    </p>
+</section>
+
+<section class="slide">
+    <h2>JSX. Робота з шаблонами в React</h2>
+    <b>Атрибути</b>
+    <p>
+        У React значення для HTML-атрибутів вставляються в фігурних дужках:
+    </p>
+    <p>
+        <code>
+            &lt;div id={dynamicId}&gt;&lt;/div&gt;
+            <br/>
+            {/* dynamicId - це змінна або вираз, який визначає id */}
+        </code>
+    </p>
+    <p>Якщо значенням <code>dynamicId</code> буде null, undefined чи false, то атрибут
+        <code>id</code> не додасться до елемента <code>&lt;div&gt;</code>
+    </p>
+</section>
+
+
+<section class="slide">
+    <h2>JSX. Робота з шаблонами в React</h2>
+    <b>Використання виразів JavaScript</b>
+    <p>
+        Поки ми пов'язували дані з
+        властивостями у JSX лише за
+        простими ключами. Однак насправді
+        при зв'язуванні даних React підтримує
+        всю потужність виразів JavaScript:
+    </p>
+    <p>
+        <code>
+            { number + 1 }
+            <br>
+            { ok ? 'YES' : 'NO' }
+            <br>
+            { message.split('').reverse().join('') }
+            <br>
+            &lt;div id={"list-" + id}&gt;&lt;/div&gt;
+            <br>
+            &lt;div id={`list-${id}`}&gt;&lt;/div&gt;
+        </code>
+    </p>
+</section>
+
+
+<section class="slide">
+    <h2>JSX. Робота з шаблонами в React</h2>
+    <p>
+        Вирази всередині JSX обчислюються як JavaScript-код у контексті компонента.
+    </p>
+    <p>
+        Єдине обмеження — у фігурних дужках допускається тільки один вираз, тому наступний код не спрацює:
+    </p>
+    <p>
+        <code>
+            { const a = 1 }
+            <br>
+            { if (ok) {return message} }
+        </code>
+    </p>
+</section>
+
+
+<section class="slide">
+    <h2>Умовний рендеринг</h2>
+    <p>У React умовний рендерінг — це спосіб відображати або
+        приховувати елементи залежно від певних умов (змінних, стану, пропсів тощо).
+        Ідея в тому, що JSX дозволяє вставляти JavaScript-вирази в фігурних дужках <code>{}</code>.
+    </p>
+    <p>
+        Основні способи умовного рендерінгу:
+    </p>
+    <ul>
+        <li>Через логічний оператор <code>&&</code></li>
+        <li>Через тернарний оператор <code>? :</code></li>
+        <li>Через умовний рендер у функції</li>
+    </ul>
 </section>
 
 <section class="slide">
     <h2>Умовний рендеринг</h2>
-    <p>У React немає директив v-if, v-show. Використовуються вирази JS:</p>
-    <pre><code>
-{flag && &lt;h1&gt;Hello&lt;/h1&gt;}
-{flag ? &lt;h1&gt;Hello&lt;/h1&gt; : &lt;h1&gt;Bye&lt;/h1&gt;}
-    </code></pre>
+    <b>
+        Через логічний оператор <code>&&</code><br>
+    </b>
+    <p>
+        Використовується, коли потрібно показати елемент лише за певної умови:
+    </p>
+    <code>
+        function Greeting({ isLoggedIn }: {isLoggedIn: boolean}) {
+        &nbsp;&nbsp;return (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;
+        {isLoggedIn && &lt;p&gt;Вітаємо користувача!&lt;/p&gt;}
+        &lt;/div&gt;<br>
+        &nbsp;&nbsp;);<br>
+        }
+    </code>
+    <p>
+        Якщо <code>isLoggedIn = true</code>, елемент <code>&lt;p&gt;</code> буде відображено. Якщо <code>false</code> —
+        нічого не рендериться.
+    </p>
+</section>
+
+<section class="slide">
+    <h2>Умовний рендеринг</h2>
+    <b>
+        Через тернарний оператор <code>? :</code>
+    </b>
+    <p>
+        Коли потрібно вибрати між двома варіантами:
+    </p>
+    <code>
+        function Greeting({ isLoggedIn }: {isLoggedIn: boolean}) {
+        &nbsp;&nbsp;return (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;
+        {isLoggedIn<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? &lt;p&gt;Вітаємо користувача!&lt;/p&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &lt;p&gt;Будь ласка, увійдіть&lt;/p&gt;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+        &nbsp;&nbsp;);<br>
+        }
+    </code>
+</section>
+
+<section class="slide">
+    <h2>Умовний рендеринг</h2>
+    <b>
+        Через умовний рендер у функції
+    </b>
+    <p>
+        Можна визначати змінні всередині функції компонента:
+    </p>
+    <code>
+        function Greeting({ isLoggedIn }: {isLoggedIn: boolean}) {<br>
+        &nbsp;&nbsp;let message;<br>
+        &nbsp;&nbsp;if (isLoggedIn) {
+        message = &lt;p>Вітаємо користувача!&lt;/p>;
+        } <br> &nbsp;&nbsp;else {
+        message = &lt;p>Будь ласка, увійдіть&lt;/p>;
+        }<br><br>
+
+        &nbsp;&nbsp;return &lt;div>{message}&lt;/div>;<br>
+        }
+    </code>
+</section>
+
+<section class="slide">
+    <h2>Умовний рендеринг</h2>
+    <b>
+        Пам'ятка:
+    </b>
+    <p>
+        У JSX не можна використовувати блок <code>if</code> прямо всередині дужок <code>{}</code>,
+        але можна через тернарник або логічний оператор.
+    </p>
+    <p>
+        Всі умови обчислюються як JavaScript, і DOM автоматично оновлюється,
+        коли змінюється <code>state</code> (стан) або <code>props</code> (властивість).
+    </p>
+</section>
+
+
+<section class="slide">
+    <h2>Рендеринг списків</h2>
+    <div class="columns two">
+        <div>
+            <p>
+                У React для відображення списку елементів на основі масиву даних використовується метод
+                <code>map()</code>.
+            </p>
+            <p>
+                <code>map()</code> — це стандартний метод масиву JavaScript.
+                Він проходить по всіх елементах масиву і створює новий масив, який повертається.
+                У нашому випадку ми створюємо масив JSX-елементів <code>&lt;li&gt;</code>.
+            </p>
+        </div>
+        <div>
+            <img src="pictures/2.png" alt="" width="100%" style="border: 4px solid #ABB8C3">
+            <div>
+                <div style="font-size: 0.75rem">
+                    <code>items[0] = "Яблуко" → &lt;li key={0}>Яблуко&lt;/li></code>
+                    <code>items[1] = "Банан" → &lt;li key={1}>Банан&lt;/li></code>
+                    <code>items[2] = "Вишня" → &lt;li key={2}>Вишня&lt;/li></code>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="slide">
     <h2>Рендеринг списків</h2>
-    <p>Аналог v-for у Vue — метод <code>map</code> у JS:</p>
-    <pre><code>
-const items = ["яблуко", "груша", "слива"];
-
-&lt;ul&gt;
-  {items.map((item, index) =&gt;
-    &lt;li key={index}&gt;{item}&lt;/li&gt;
-  )}
-&lt;/ul&gt;
-    </code></pre>
+    <div class="columns two">
+        <div>
+            <b>Атрибут <code>key</code></b>
+            <p>
+                Це спеціальний атрибут,
+                який використовується для унікальної ідентифікації елементів списку.
+            </p>
+            <p>
+                <code>key</code> потрібен лише для списків елементів
+            </p>
+            <p>
+                Він не передається в компоненту як атрибут,
+                а використовується внутрішньо React для оптимізації.
+            </p>
+        </div>
+        <div>
+            <img src="pictures/2.png" alt="" width="100%" style="border: 4px solid #ABB8C3">
+            <div>
+                <div style="font-size: 0.75rem">
+                    <code>items[0] = "Яблуко" → &lt;li key={0}>Яблуко&lt;/li></code>
+                    <code>items[1] = "Банан" → &lt;li key={1}>Банан&lt;/li></code>
+                    <code>items[2] = "Вишня" → &lt;li key={2}>Вишня&lt;/li></code>
+                </div>
+            </div>
+        </div>
 </section>
 
 <section class="slide">
-    <h2>Стан (State)</h2>
-    <p>Для внутрішнього стану компонентів використовують хук <code>useState</code>:</p>
-    <pre><code>
-import { useState } from "react";
-
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Клікнули {count} разів&lt;/p&gt;
-      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;+1&lt;/button&gt;
-    &lt;/div&gt;
-  );
-}
-    </code></pre>
+    <h2>Рендеринг об'єктів</h2>
+    <p>
+        У React об’єкт безпосередньо рендерити не можна,
+        бо JSX очікує рядок, число або елемент.
+    </p>
+    <p>
+        Тому треба перетворити об’єкт на щось відображуване. Є кілька способів:
+    </p>
+    <ul>
+        <li>Рендерити окремі властивості</li>
+        <li>Використовувати <code>Object.entries()</code> + <code>map()</code> для всіх властивостей</li>
+    </ul>
 </section>
+
+<section class="slide">
+    <h2>Рендеринг об'єктів</h2>
+    <div class="columns two">
+        <div>
+            <b>Рендеринг окремих властивостей</b>
+            <p>
+                Найпростіший і найпоширеніший спосіб — взяти поля об’єкта і вставити їх у JSX:
+            </p>
+            <p>
+                Плюс: легко форматувати, можна додавати HTML-структуру.
+            </p>
+        </div>
+        <div>
+            <img src="pictures/3.png" alt="" width="100%" style="border: 4px solid #ABB8C3">
+        </div>
+    </div>
+</section>
+
+<section class="slide">
+    <h2>Рендеринг об'єктів</h2>
+    <div class="columns two">
+        <div>
+            <b><code>Object.entries()</code> + <code>map()</code></b>
+            <p>
+                Найкраще підходить якщо полів багато або вони динамічні:
+            </p>
+        </div>
+        <div>
+            <img src="pictures/4.png" alt="" width="100%" style="border: 4px solid #ABB8C3">
+        </div>
+    </div>
+    <div style="font-size: 0.75rem">
+        <code>Object.entries(book)</code> → масив <code>[["title","The Book"], ["author","John Doe"], ...]</code>.
+        <br><code>map()</code> → створює список <code>&lt;li></code> для кожної властивості.
+        <br><code>key</code> → унікальний ключ для React (тут можна використовувати ім’я поля).
+    </div>
+</section>
+
+<section class="slide">
+    <h2>Умовний рендеринг елементів списку</h2>
+    <div class="columns two">
+        <div>
+            <p>
+                При рендерингу списків у React можна застосовувати умовний рендеринг для окремих елементів. Це робить
+                списки більш гнучкими та динамічними, адже будь-які зміни автоматично відображаються
+                в DOM. </p>
+        </div>
+        <div>
+            <img src="pictures/5.png" alt="" width="100%" style="border: 4px solid #ABB8C3">
+        </div>
+    </div>
+</section>
+
 
 <section class="slide">
     <h2>Резюме</h2>
     <ul>
-        <li>Компоненти — основні будівельні блоки React (<a href="https://react.dev/learn/your-first-component"
+        <li>Компоненти — основні будівельні блоки React, які можна повторно використовувати в усій
+            програмі (<a href="https://react.dev/learn/your-first-component"
                                                             target="_blank">Docs</a>).
         </li>
-        <li>JSX дозволяє поєднувати HTML + JS у єдиному файлі.</li>
-        <li>Для умовного рендерингу та списків використовуються вирази JavaScript.</li>
-        <li>Стан керується хуками (<code>useState</code>, <code>useEffect</code> тощо).</li>
+        <li>Компоненти створюються за допомогою JSX і можуть
+            використовуватися для створення складних, динамічних інтерфейсів користувача
+        </li>
+        <li>Для умовного рендерингу,списків та об'єктів використовуються вирази JavaScript.</li>
+        <li><code>key</code> - це спеціальний атрибут,
+            який використовується для унікальної ідентифікації елементів списку.</li>
+        <li><code>key</code> потрібен лише для списків елементів</li>
         <li><a href="https://react.dev/learn" target="_blank">Tutorial</a></li>
     </ul>
 </section>
