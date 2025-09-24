@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <title>React</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="../../../core/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+    </style>
+</head>
+<body class="shower list">
+
+<header class="caption">
+    <h1>Основи роботи з компонентами. JSX. Рендеринг</h1>
+</header>
+
+<section class="slide">
+    <h2>Лекція 6. Основи роботи з компонентами. JSX. Рендеринг</h2>
+    <h3>План лекції:</h3>
+    <ol>
+        <li>Що таке компонент React?</li>
+        <li>Структура компонента</li>
+        <li>JSX. Робота з JSX</li>
+        <li>Умовний рендеринг і списки</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Основні концепції React</h2>
+    <ol>
+        <li><a href="https://uk.react.dev/learn/state-a-components-memory"
+               target="_blank">Стан і реактивність</a>.
+        </li>
+        <li><a href="https://uk.react.dev/learn/sharing-state-between-components"
+               target="_blank">Одностороннє зв'язування даних</a>.
+        </li>
+        <li><a href="https://uk.react.dev/learn/writing-markup-with-jsx"
+               target="_blank">Декларативність (JSX)</a>.
+        </li>
+        <li><a href="https://uk.react.dev/learn/your-first-component"
+               target="_blank">Компоненти</a>.
+        </li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Що таке компонент React?</h2>
+    <p><b>Компоненти</b> — це блоки, які дозволяють нам розділити інтерфейс користувача (UI) на незалежні частини, які
+        можна багаторазово використовувати, і думати про кожну частину окремо. <a
+                href="https://ua.vuejs.org/guide/essentials/component-basics.html" target="_blank">Documentation.</a>
+    </p>
+    <img src="pictures/component.png" alt="" width="650" style="display: block; margin: 0 auto">
+</section>
+
+<section class="slide">
+    <h2>Що таке компонент React?</h2>
+    <p>
+        React використовує <b>JSX</b> — синтаксис,
+        який поєднує JavaScript із розміткою,
+        схожою на HTML. Завдяки цьому можна
+        описати, як має виглядати
+        інтерфейс користувача, використовуючи
+        знайомий синтаксис.
+    </p>
+    <p>
+        <b>Компоненти</b> — це будівельні блоки
+        React, які можна повторно
+        використовувати в різних частинах
+        програми. Компоненти — це звичайні
+        JavaScript-функції (або класи), що
+        повертають JSX і дозволяють створювати
+        складні, динамічні інтерфейси.
+    </p>
+</section>
+
+<section class="slide">
+    <h2>Оголошення компонента React</h2>
+    <p>
+        У React компоненти зазвичай створюються у файлах із розширенням <code>.jsx</code> або <code>.tsx</code>
+        (якщо використовується TypeScript).
+    </p>
+    <p>
+        Компонент React — це функція JavaScript (або клас), яка повертає JSX.
+        Логіку та стилі зазвичай розділяють у різні файли: JSX-файл для компонента, CSS/SCSS для стилів.
+        Такий підхід дозволяє легко організовувати код і повторно використовувати компоненти.
+    </p>
+</section>
+
+
+<section class="slide">
+    <h2>Структура компонента React</h2>
+    <div class="columns two">
+        <img src="pictures/react-component.png" width="450" alt="">
+        <div>
+            <ol>
+                <li>JSX (розмітка)</li>
+                <li>JavaScript-логіка</li>
+                <li>CSS/стилі</li>
+            </ol>
+            <p>
+                У React немає єдиного файлу з розділами, як у Vue SFC.
+                Зазвичай розмітка (JSX) та логіка знаходяться в одному файлі
+                <code>.jsx</code> або <code>.tsx</code>, а стилі — в окремих CSS/SCSS файлах
+                чи у вигляді CSS-in-JS.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section class="slide">
+    <h2>JSX. Інтерполяції</h2>
+    <p>В JSX дані можна вставляти у фігурних дужках:</p>
+    <pre><code>
+const msg = "Hello!";
+&lt;span&gt;Повідомлення: {msg}&lt;/span&gt;
+    </code></pre>
+    <p>Значення буде оновлюватися динамічно при зміні стану.</p>
+</section>
+
+<section class="slide">
+    <h2>JSX. Атрибути</h2>
+    <p>Атрибути пишуться як властивості JS-об’єктів:</p>
+    <pre><code>
+const id = "dynamicId";
+&lt;div id={id}&gt;&lt;/div&gt;
+
+const isDisabled = true;
+&lt;button disabled={isDisabled}&gt;Кнопка&lt;/button&gt;
+    </code></pre>
+</section>
+
+<section class="slide">
+    <h2>JSX. Використання виразів</h2>
+    <pre><code>
+&lt;p&gt;{1 + 2}&lt;/p&gt;
+&lt;p&gt;{ok ? "YES" : "NO"}&lt;/p&gt;
+&lt;p&gt;{message.split("").reverse().join("")}&lt;/p&gt;
+&lt;div id={`list-${id}`}&gt;&lt;/div&gt;
+    </code></pre>
+</section>
+
+<section class="slide">
+    <h2>Умовний рендеринг</h2>
+    <p>У React немає директив v-if, v-show. Використовуються вирази JS:</p>
+    <pre><code>
+{flag && &lt;h1&gt;Hello&lt;/h1&gt;}
+{flag ? &lt;h1&gt;Hello&lt;/h1&gt; : &lt;h1&gt;Bye&lt;/h1&gt;}
+    </code></pre>
+</section>
+
+<section class="slide">
+    <h2>Рендеринг списків</h2>
+    <p>Аналог v-for у Vue — метод <code>map</code> у JS:</p>
+    <pre><code>
+const items = ["яблуко", "груша", "слива"];
+
+&lt;ul&gt;
+  {items.map((item, index) =&gt;
+    &lt;li key={index}&gt;{item}&lt;/li&gt;
+  )}
+&lt;/ul&gt;
+    </code></pre>
+</section>
+
+<section class="slide">
+    <h2>Стан (State)</h2>
+    <p>Для внутрішнього стану компонентів використовують хук <code>useState</code>:</p>
+    <pre><code>
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Клікнули {count} разів&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;+1&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+    </code></pre>
+</section>
+
+<section class="slide">
+    <h2>Резюме</h2>
+    <ul>
+        <li>Компоненти — основні будівельні блоки React (<a href="https://react.dev/learn/your-first-component"
+                                                            target="_blank">Docs</a>).
+        </li>
+        <li>JSX дозволяє поєднувати HTML + JS у єдиному файлі.</li>
+        <li>Для умовного рендерингу та списків використовуються вирази JavaScript.</li>
+        <li>Стан керується хуками (<code>useState</code>, <code>useEffect</code> тощо).</li>
+        <li><a href="https://react.dev/learn" target="_blank">Tutorial</a></li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2 class="shout">Дякую за увагу!</h2>
+</section>
+
+<div class="progress"></div>
+
+<script src="../../../core/shower.js"></script>
+</body>
+</html>

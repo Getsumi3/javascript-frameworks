@@ -1,0 +1,9 @@
+.greetings {
+    font-weight: 500;
+    font-size: 2rem;
+    position: relative;
+
+    .green {
+        color: #54b554;
+    }
+}
