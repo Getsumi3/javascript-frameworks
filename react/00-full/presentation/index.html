@@ -417,24 +417,24 @@ function Toolbar(){
     <ul>
         <li>
             <b>Slice</b> — це логічний модуль стану, який містить:
-                початковий стан (<code>initialState</code>),
-                редʼюсери (функції, що змінюють стан)
+            початковий стан (<code>initialState</code>),
+            редʼюсери (функції, що змінюють стан)
             <p><i>Аналог окремого “підрозділу” стану, наприклад: користувачі, кошик, повідомлення.</i></p>
         </li>
 
         <li>
             <b>Store</b> — це єдине джерело глобального стану програми:
-                зберігає всі слайси,
-                передає стан компонентам через <code>&lt;Provider&gt;</code>,
-                підтримує middleware та DevTools.
+            зберігає всі слайси,
+            передає стан компонентам через <code>&lt;Provider&gt;</code>,
+            підтримує middleware та DevTools.
             <p><i>Центральний “контейнер” даних додатку.</i></p>
         </li>
 
         <li>
             <b>Middleware</b> — це функції, які перехоплюють дії (actions)
             перед тим, як вони потрапляють до редʼюсерів.
-                використовуються для логування, запитів, обробки асинхронності,
-                додаються через <code>middleware</code> у <code>configureStore()</code>.
+            використовуються для логування, запитів, обробки асинхронності,
+            додаються через <code>middleware</code> у <code>configureStore()</code>.
             <p><i>“Проміжний шар” між діями та змінами стану.</i></p>
         </li>
     </ul>
@@ -805,6 +805,116 @@ export default App;
 </section>
 
 <section class="slide">
+    <h2>Налаштування середовища для розробки</h2>
+    <ul>
+        <li>
+            <a href="https://uk.react.dev/learn" target="_blank">Documentation.</a>
+        </li>
+        <li>
+            Швидко спробувати React можна в онлайн-пісочницях:
+            <ul>
+                <li><a href="https://codesandbox.io/s/new" target="_blank">Codesandbox</a></li>
+                <li><a href="https://stackblitz.com/fork/react" target="_blank">StackBlitz</a></li>
+                <li><a href="https://jsfiddle.net/" target="_blank">JSFiddle</a></li>
+                <li><a href="https://playcode.io/new" target="_blank">PlayCode</a></li>
+            </ul>
+        </li>
+        <li>
+            Створення застосунку React на локальному комп'ютері (Передумови: Node.js версії 20 або новіша).
+            Сучасний підхід полягає у використанні збірки Vite, яка дозволяє швидко створити новий проєкт із готовим
+            шаблоном для React або React + TypeScript.
+        </li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Вибір IDE/редактора коду</h2>
+    <ul>
+        <li>WebStorm</li>
+        <li>Visual Studio Code</li>
+        <li>Visual Studio Community</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Vanilla JS vs React</h2>
+    <p>Приклади у директорії <b>examples</b></p>
+</section>
+
+<section class="slide">
+    <h2>Vanilla JS vs React</h2>
+    <p>React спрощує роботу з DOM завдяки концепції Virtual DOM та декларативному рендерингу компонентів.</p>
+    <p>У чистому JavaScript потрібно вручну додавати слухачі подій і оновлювати DOM, тоді як у React оновлення
+        інтерфейсу відбувається автоматично при зміні стану (<code>state</code>) або властивостей (<code>props</code>),
+        що робить код більш передбачуваним і чистим.</p>
+    <p>React використовує одностороннє зв'язування даних, де зміни в інтерфейсі обробляються через події, які оновлюють
+        стан, що полегшує контроль над даними і налагодження застосунку.</p>
+</section>
+
+
+<section class="slide">
+    <h2>React+Vite+TypeScript (Recommended)</h2>
+    <p>Для створення сучасного React-застосунку рекомендується використовувати <a href="https://vitejs.dev/"
+                                                                                  target="_blank">Vite</a> як збірку.
+    </p>
+    <p>Vite забезпечує швидкий старт проекту та миттєву заміну модулів (HMR), надаючи значно кращий досвід розробки у
+        порівнянні зі старими підходами.</p>
+    <p>Сам Vite виступає як інструмент для scaffold'у: він створює попередньо налаштований проект на основі обраних
+        опцій, а весь процес збірки та плагіни керуються Vite, що дозволяє легко інтегрувати екосистему Rollup-сумісних
+        плагінів.</p>
+</section>
+
+<section class="slide">
+    <h2>Порівняльна таблиця React х VueJS</h2>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+        <tr>
+            <th>Параметр</th>
+            <th>React</th>
+            <th>Vue.js</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Тип</td>
+            <td>Бібліотека</td>
+            <td>Фреймворк</td>
+        </tr>
+        <tr>
+            <td>Рендеринг</td>
+            <td>JSX, декларативний</td>
+            <td>Шаблони, декларативний</td>
+        </tr>
+        <tr>
+            <td>Зв’язування</td>
+            <td>Одностороннє</td>
+            <td>Двостороннє</td>
+        </tr>
+        <tr>
+            <td>Компоненти</td>
+            <td>Функц./клас.</td>
+            <td>SFC</td>
+        </tr>
+        <tr>
+            <td>Virtual DOM</td>
+            <td>Так</td>
+            <td>Так</td>
+        </tr>
+        <tr>
+            <td>Стан</td>
+            <td>useState/useReducer, Redux</td>
+            <td>data, Vuex/Pinia</td>
+        </tr>
+        <tr>
+            <td>Крива навчання</td>
+            <td>Середня, JSX та розуміння екосистеми</td>
+            <td>Легка, шаблони схожі на HTML</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="slide">
     <h2>Поради та шаблони</h2>
     <ul>
         <li>Підтримуйте компоненти малі та сфокусовані</li>
@@ -813,6 +923,7 @@ export default App;
         <li>Context — для конфігурації/теми; Redux — для складного глобального стану</li>
     </ul>
 </section>
+
 
 <section class="slide">
     <h2 class="shout">Дякую за увагу!</h2>
