@@ -46,6 +46,22 @@
 </section>
 
 <section class="slide">
+    <h2>Лектор</h2>
+    <div style="display: flex">
+        <div>
+            <p><b>Томюк Георгій Миколайович</b></p>
+            <p>Досвід роботи у сфері програмної інженерії понад 8 років</p>
+            <ul>
+                <li><b>Val'soft</b> — 2017–2021. Fullstack Web & Game developer</li>
+                <li><b>Quant Azimuth</b> — 2021. Frontend Web developer</li>
+            </ul>
+            <p></p>
+        </div>
+        <img src="pictures/stack.png" alt="Stack" width="450px"/>
+    </div>
+</section>
+
+<section class="slide">
     <h2>Що таке React?</h2>
     <p><b>React</b> — це бібліотека JavaScript, створена для побудови користувацьких інтерфейсів. Вона працює на основі
         HTML, CSS і JavaScript з можливістю декларативно описувати UI та створювати багаторазові компоненти.
@@ -55,6 +71,7 @@
     </p>
     <img src="pictures/1.png" alt="React" style="display:block; margin:0 auto; max-width:70%">
 </section>
+
 
 <section class="slide">
     <h2>Історія створення React</h2>
@@ -445,7 +462,8 @@ function Toolbar(){
 <section class="slide">
     <h2>Redux Toolkit — повний приклад</h2>
     <p>
-        Redux Toolkit надає готові інструменти для створення слайсів, стору та мідлверів — мінімум коду, максимум зручності.
+        Redux Toolkit надає готові інструменти для створення слайсів, стору та мідлверів — мінімум коду, максимум
+        зручності.
     </p>
 
     <pre class="code"><code class="ts">// 🧩 features/counter/counterSlice.ts
@@ -547,7 +565,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 <section class="slide">
     <h2>React Router (TypeScript) — приклад</h2>
-    <pre class="code"><code class="ts">// App.tsx
+    <pre class="code"><code class="ts" style="max-height: calc(100vh - 500px)">// App.tsx
 import {BrowserRouter, Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
 
 function Home(){ return &lt;h2&gt;Головна&lt;/h2&gt; }
@@ -829,6 +847,18 @@ export default App;
 </section>
 
 <section class="slide">
+    <h2>React+Vite+TypeScript (Recommended)</h2>
+    <p>Для створення сучасного React-застосунку рекомендується використовувати <a href="https://vitejs.dev/"
+                                                                                  target="_blank">Vite</a> як збірку.
+    </p>
+    <p>Vite забезпечує швидкий старт проекту та миттєву заміну модулів (HMR), надаючи значно кращий досвід розробки у
+        порівнянні зі старими підходами.</p>
+    <p>Сам Vite виступає як інструмент для scaffold'у: він створює попередньо налаштований проект на основі обраних
+        опцій, а весь процес збірки та плагіни керуються Vite, що дозволяє легко інтегрувати екосистему Rollup-сумісних
+        плагінів.</p>
+</section>
+
+<section class="slide">
     <h2>Вибір IDE/редактора коду</h2>
     <ul>
         <li>WebStorm</li>
@@ -839,30 +869,12 @@ export default App;
 
 <section class="slide">
     <h2>Vanilla JS vs React</h2>
-    <p>Приклади у директорії <b>examples</b></p>
-</section>
-
-<section class="slide">
-    <h2>Vanilla JS vs React</h2>
     <p>React спрощує роботу з DOM завдяки концепції Virtual DOM та декларативному рендерингу компонентів.</p>
     <p>У чистому JavaScript потрібно вручну додавати слухачі подій і оновлювати DOM, тоді як у React оновлення
         інтерфейсу відбувається автоматично при зміні стану (<code>state</code>) або властивостей (<code>props</code>),
         що робить код більш передбачуваним і чистим.</p>
     <p>React використовує одностороннє зв'язування даних, де зміни в інтерфейсі обробляються через події, які оновлюють
         стан, що полегшує контроль над даними і налагодження застосунку.</p>
-</section>
-
-
-<section class="slide">
-    <h2>React+Vite+TypeScript (Recommended)</h2>
-    <p>Для створення сучасного React-застосунку рекомендується використовувати <a href="https://vitejs.dev/"
-                                                                                  target="_blank">Vite</a> як збірку.
-    </p>
-    <p>Vite забезпечує швидкий старт проекту та миттєву заміну модулів (HMR), надаючи значно кращий досвід розробки у
-        порівнянні зі старими підходами.</p>
-    <p>Сам Vite виступає як інструмент для scaffold'у: він створює попередньо налаштований проект на основі обраних
-        опцій, а весь процес збірки та плагіни керуються Vite, що дозволяє легко інтегрувати екосистему Rollup-сумісних
-        плагінів.</p>
 </section>
 
 <section class="slide">
